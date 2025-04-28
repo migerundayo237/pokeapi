@@ -8,14 +8,17 @@ export const formSuffixes = [
     "midday", "midnight", "dusk",
     "disguised", "busted",
     "50", "10", "complete", "origin",
-    "zero", "hero"
+    "zero", "hero", "single-strike"
 ];
 
 export const normalize = (str: string) =>
-    str
-      .trim()
-      .toLowerCase()
-      .replace(/[\s\-_.]/g, "");
+  str
+    .normalize("NFD")           
+    .replace(/[\u0300-\u036f]/g, "") 
+    .toLowerCase()
+    .replace(/[\s\-_.']/g, "")  
+    .trim();
+
 
 export const baseName = (name: string) => {
     for (const suffix of formSuffixes) {
